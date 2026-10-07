@@ -2,7 +2,7 @@
 
 ## 获取权限与提交修改
 
-维护者先将合作者的 GitHub 账号加入私有仓库，合作者接受邀请后克隆项目。不要共享 GitHub 登录、Apple 签名身份或云端 API Key。
+本仓库公开，查看和克隆不需要邀请。直接向本仓库推送需要维护者授予写入权限；没有写入权限时，先 Fork 到自己的账号，再从 Fork 发起 Pull Request。不要共享 GitHub 登录、Apple 签名身份或云端 API Key。
 
 ```sh
 git clone https://github.com/hanscea/inkstudy-ipad.git
@@ -20,6 +20,8 @@ git diff --cached
 git commit -m "Describe the change"
 git push -u origin fix/short-description
 ```
+
+上述推送命令用于已有写入权限的合作者。使用 Fork 时，克隆自己账号下的仓库，使 `origin` 指向自己的 Fork，再推送分支并向 `hanscea/inkstudy-ipad` 提交 PR。
 
 PR 说明包含修改目的、涉及的 App 入口、测试命令和结果。界面问题可以附使用虚构数据制作的截图；不要附真实儿童作品、身份信息、配对码或包含凭据的终端画面。
 

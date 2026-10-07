@@ -41,7 +41,7 @@ InkStudy 是用于色彩、线条和综合创作研究的原生 iPad 项目。�
 
 ## 获取项目
 
-私有仓库需要先接受维护者的协作者邀请。登录有访问权限的 GitHub 账号后，可以使用 GitHub Desktop、GitHub CLI 或已配置的 Git 凭据克隆：
+本仓库公开，查看、下载和 HTTPS 克隆无需协作者邀请。可以使用 GitHub Desktop、GitHub CLI 或 Git 获取代码：
 
 ```sh
 git clone https://github.com/hanscea/inkstudy-ipad.git
@@ -176,11 +176,11 @@ CONTRIBUTING.md        协作、测试及提交要求
 
 ## 协作与常见问题
 
-- **打不开仓库或出现 404：** 确认当前 GitHub 账号已接受该私有仓库邀请。
+- **无法克隆或推送：** 公开代码可直接克隆；推送到本仓库需要写入权限。没有写入权限时，可以 Fork 后发起 Pull Request。
 - **签名失败：** 使用自己的 Apple Team 和可用 Bundle ID，不需要维护者的签名证书。
 - **力度不变化：** 模拟器、手指及不支持压感的输入不能验证压力；先检查 Pencil 与设备兼容性。
 - **C 组显示本地回退：** 检查成人演练开关、配对、服务进程、局域网授权及服务调用上限。回退来源会进入日志。
 - **命令找不到模拟器或工具链：** 检查完整 Xcode 路径与已安装的 iOS Simulator runtime。
 - **想贡献修改：** 按[协作说明](CONTRIBUTING.md)新建分支和 Pull Request；任务入口与源码对应关系见[架构说明](docs/collaboration/ARCHITECTURE.md)。
 
-维护者通过 GitHub 仓库的 Collaborators 设置邀请合作者。代码访问与研究数据访问分别授权。本仓库暂未为原创代码设置开源许可证；第三方 Spectral.js 的 MIT 许可证及版权声明随源码保留。
+维护者通过 GitHub 仓库的 Collaborators 设置授予合作者写入权限，研究数据另行授权。本仓库暂未为原创代码设置开源许可证；第三方 Spectral.js 的 MIT 许可证及版权声明随源码保留。
