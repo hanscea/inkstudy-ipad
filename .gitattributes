@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.rgb binary
+# Preserve upstream bytes and the recorded SHA-256.
+native/InkStudy/ThirdParty/Spectral/spectral.cjs -text !eol whitespace=cr-at-eol

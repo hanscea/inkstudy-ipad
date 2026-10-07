@@ -1,0 +1,162 @@
+name: InkStudy
+options:
+  bundleIdPrefix: cn.xinsun
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "26.6"
+packages:
+  InkStudyCore:
+    path: Core
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    TARGETED_DEVICE_FAMILY: "2"
+    DEVELOPMENT_TEAM: ""
+    MARKETING_VERSION: "0.4.4"
+    CURRENT_PROJECT_VERSION: "9"
+targets:
+  InkStudy:
+    type: application
+    platform: iOS
+    sources: [App]
+    dependencies:
+      - package: InkStudyCore
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: 绘画记录
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        InkStudyReleaseName: 0911V4
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations: {}
+        UIApplicationSupportsIndirectInputEvents: true
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        NSLocalNetworkUsageDescription: 连接研究者在同一局域网中的 Mac 万相服务端；只在你主动配对和生成时连接。
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+          NSExceptionDomains:
+            localhost:
+              NSExceptionAllowsInsecureHTTPLoads: true
+            "127.0.0.1":
+              NSExceptionAllowsInsecureHTTPLoads: true
+            "10.0.0.0/8":
+              NSExceptionAllowsInsecureHTTPLoads: true
+            "172.16.0.0/12":
+              NSExceptionAllowsInsecureHTTPLoads: true
+            "192.168.0.0/16":
+              NSExceptionAllowsInsecureHTTPLoads: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: cn.xinsun.inkstudy.prototype
+        TARGETED_DEVICE_FAMILY: "2"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_IDENTITY: iPhone Developer
+        CODE_SIGN_STYLE: Automatic
+    postBuildScripts:
+      - name: Verify Packaged Model Resources
+        script: /bin/sh "$SRCROOT/scripts/verify-app-package.sh" "$TARGET_BUILD_DIR/$WRAPPER_NAME"
+        basedOnDependencyAnalysis: false
+  InkStudyAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [AppTests]
+    dependencies:
+      - target: InkStudy
+      - package: InkStudyCore
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: "2"
+        PRODUCT_BUNDLE_IDENTIFIER: cn.xinsun.inkstudy.prototype.apptests
+  InkStudyHintPreview:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+        excludes: [Info.plist]
+    dependencies:
+      - package: InkStudyCore
+    info:
+      path: HintPreview/Info.plist
+      properties:
+        CFBundleDisplayName: 绘画提示测试
+        CFBundleShortVersionString: "0.5.0"
+        CFBundleVersion: "1"
+        InkStudyReleaseName: 0917H1
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations: {}
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        NSLocalNetworkUsageDescription: 成人演练时连接同一可信网络中的 Mac 提示服务，只发送操作摘要。
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+          NSAllowsLocalNetworking: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: cn.xinsun.inkstudy.hintpreview
+        PRODUCT_MODULE_NAME: InkStudy
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) HINTS_PREVIEW"
+        TARGETED_DEVICE_FAMILY: "2"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_IDENTITY: iPhone Developer
+        CODE_SIGN_STYLE: Automatic
+  InkStudyHintTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [AppTests]
+    dependencies:
+      - target: InkStudyHintPreview
+      - package: InkStudyCore
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: cn.xinsun.inkstudy.hintpreview.tests
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+  InkStudyHintUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [HintUITests]
+    dependencies:
+      - target: InkStudyHintPreview
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: cn.xinsun.inkstudy.hintpreview.uitests
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+schemes:
+  InkStudy:
+    build:
+      targets:
+        InkStudy: all
+    test:
+      targets: [InkStudyAppTests]
+  InkStudyHints:
+    build:
+      targets:
+        InkStudyHintPreview: all
+    test:
+      targets: [InkStudyHintTests, InkStudyHintUITests]
